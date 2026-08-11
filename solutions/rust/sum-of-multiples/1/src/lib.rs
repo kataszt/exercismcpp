@@ -1,0 +1,19 @@
+use std::collections::HashSet;
+
+pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
+    let mut earned_energy : u32 = 0;
+    let mut set_of_earned_energy: HashSet<u32> = HashSet::new();
+    
+    for i in 0..factors.len(){
+        if factors[i] == 0{
+            continue
+        }
+        let mut current_factor = factors[i];
+        for current_factor in (current_factor..limit).step_by(current_factor as usize){
+            let mut current_value = current_factor;
+            set_of_earned_energy.insert(current_value);
+        }
+    }
+    earned_energy = set_of_earned_energy.iter().sum();
+    earned_energy
+}
